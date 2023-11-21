@@ -7,16 +7,16 @@
       <svg t="1668591375874" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3516" width="200" height="200"><path d="M658.56 557.392L322.536 221.384l45.248-45.256 336.016 336.008z" p-id="3517" fill="#ffffff"></path><path d="M704.088 512.2L364.12 852.16l-45.256-45.248 339.976-339.976z" p-id="3518" fill="#ffffff"></path></svg>
     </div>
 
-    <a class="focus-item" v-for="(item, index) in items" v-show="cur_group_index * group_size > index && (cur_group_index - 1) * group_size <= index">
+    <a class="focus-item" @click="player(item)" @mouseover="handleHover(index)" v-for="(item, index) in items" v-show="cur_group_index * group_size > index && (cur_group_index - 1) * group_size <= index">
       <div class="poster">
         <div class="process-wrap">
           <div class="occupy" style="width: 0%"></div>
         </div>
         <img class="pic" :src="item.min_pic">
-        <div class="unchoice-mask"></div>
+        <div :class="[cur_active_index == index ? '' : 'unchoice-mask']"></div>
       </div>
 
-      <div class="title">
+      <div class="title" :class="[cur_active_index == index ? 'active' : '']">
         {{item.title}}
       </div>
     </a>
@@ -25,93 +25,21 @@
 
 <script>
 export default {
-  name: "Carouselist",
+  name: "CardCarousel",
+  props: {
+    cur_active_index: {
+      type: Number,
+      required: true
+    },
+    items: {
+      type: Array,
+      required: true
+    }
+  },
   data(){
     return {
       group_size: 5,
       cur_group_index: 1,
-      items: [
-        {
-          logo: 'https://puui.qpic.cn/tv/0/1249352026/0',
-          label: '杨幂 白宇 医疗题材',
-          reason: '杨幂白宇为生命暖心护航',
-          max_pic: 'https://puui.qpic.cn/tv/0/1249444757_1920800/0',
-          min_pic: 'https://puui.qpic.cn/tv/0/1249351719_276386/450',
-          title: '谢谢你医生'
-        },
-        {
-          logo: 'https://puui.qpic.cn/tv/0/1249488597/0',
-          label: '毛不易 李雪琴 脱口秀',
-          reason: '王源朋友圈里鹿晗最搞笑',
-          max_pic: 'https://puui.qpic.cn/tv/0/1249488592_1920800/0',
-          min_pic: 'https://puui.qpic.cn/tv/0/1249488585_276386/450',
-          title: '毛雪汪'
-        },
-        {
-          logo: 'https://puui.qpic.cn/tv/0/1249437484/0',
-          label: '史蒂夫·卡瑞尔 艾伦·阿金 合家欢',
-          reason: '全员卖萌拯救“小老板“',
-          max_pic: 'https://puui.qpic.cn/tv/0/1249444738_1920800/0',
-          min_pic: 'https://puui.qpic.cn/tv/0/1249437478_276386/450',
-          title: '小黄人大眼萌'
-        },
-        {
-          logo: 'https://puui.qpic.cn/tv/0/1249482364/0',
-          label: '美食纪录片 地方美食 饮食文化',
-          reason: '四川大邑·肥肠血旺',
-          max_pic: 'https://puui.qpic.cn/tv/0/1249482362_1920800/0',
-          min_pic: 'https://puui.qpic.cn/tv/0/1249482357_276386/450',
-          title: '早餐中国'
-        },
-        {
-          logo: 'https://puui.qpic.cn/tv/0/1249366474/0',
-          label: '秦昊 万茜 工业题材',
-          reason: '秦昊万茜掌舵工业变革',
-          max_pic: 'https://puui.qpic.cn/tv/0/1249444874_1920800/0',
-          min_pic: 'https://puui.qpic.cn/tv/0/1249366464_276386/450',
-          title: '大博弈'
-        },
-        {
-          logo: 'https://puui.qpic.cn/tv/0/1249437484/0',
-          label: '史蒂夫·卡瑞尔 艾伦·阿金 合家欢',
-          reason: '全员卖萌拯救“小老板“',
-          max_pic: 'https://puui.qpic.cn/tv/0/1249444738_1920800/0',
-          min_pic: 'https://puui.qpic.cn/tv/0/1249437478_276386/450',
-          title: '小黄人大眼萌'
-        },
-        {
-          logo: 'https://puui.qpic.cn/tv/0/1249482364/0',
-          label: '美食纪录片 地方美食 饮食文化',
-          reason: '四川大邑·肥肠血旺',
-          max_pic: 'https://puui.qpic.cn/tv/0/1249482362_1920800/0',
-          min_pic: 'https://puui.qpic.cn/tv/0/1249482357_276386/450',
-          title: '早餐中国'
-        },
-        {
-          logo: 'https://puui.qpic.cn/tv/0/1249366474/0',
-          label: '秦昊 万茜 工业题材',
-          reason: '秦昊万茜掌舵工业变革',
-          max_pic: 'https://puui.qpic.cn/tv/0/1249444874_1920800/0',
-          min_pic: 'https://puui.qpic.cn/tv/0/1249366464_276386/450',
-          title: '大博弈'
-        },
-        {
-          logo: 'https://puui.qpic.cn/tv/0/1249437484/0',
-          label: '史蒂夫·卡瑞尔 艾伦·阿金 合家欢',
-          reason: '全员卖萌拯救“小老板“',
-          max_pic: 'https://puui.qpic.cn/tv/0/1249444738_1920800/0',
-          min_pic: 'https://puui.qpic.cn/tv/0/1249437478_276386/450',
-          title: '小黄人大眼萌'
-        },
-        {
-          logo: 'https://puui.qpic.cn/tv/0/1249482364/0',
-          label: '美食纪录片 地方美食 饮食文化',
-          reason: '四川大邑·肥肠血旺',
-          max_pic: 'https://puui.qpic.cn/tv/0/1249482362_1920800/0',
-          min_pic: 'https://puui.qpic.cn/tv/0/1249482357_276386/450',
-          title: '早餐中国'
-        },
-      ]
     }
   },
   methods: {
@@ -124,6 +52,17 @@ export default {
       }else if (this.cur_group_index < min){
         this.cur_group_index = min;
       }
+    },
+    handleHover(index){
+      this.$emit('cardHover', index);
+    },
+    player(movie){
+      let {id} = movie;
+      if (id === -1){
+        alert('敬请期待...')
+      }else {
+        this.$router.push(`/player/${id}`)
+      }
     }
   }
 }
@@ -135,12 +74,14 @@ export default {
 
 .focus-list{
   position: absolute;
-  z-index: 15;
+  bottom: 40px;
+  right: 40px;
+  z-index: 9;
   display: flex;
   div{
     svg{
-      width: 24px;
-      height: 24px;
+      width: 36px;
+      height: 36px;
       color: rgb(255, 255, 255);
       &:not(:root) {
         overflow: hidden;
@@ -152,7 +93,7 @@ export default {
     width: 24px;
     height: 43px;
     position: absolute;
-    top: calc(50% - 17px);
+    top: calc(50% - 0px);
     font-size: 29px;
     color: #fff;
     transform: translateY(-50%);
@@ -162,7 +103,7 @@ export default {
 
   .turn-page-left{
     width: 44px;
-    left: -45px;
+    left: -56px;
     padding-left: 20px;
   }
 
@@ -183,14 +124,9 @@ export default {
   }
 
   .focus-item{
+    width: 91.33px;
+    height: 128.06px;
     margin-left: 12px;
-  }
-
-  @media screen and (min-width: 1440px){
-    .focus-item{
-      width: calc(((100vw - 216px - 40px * 2 - 24px) / 2 - 5 * 12px) / 6);
-      max-width: 92px;
-    }
   }
 
 
@@ -222,16 +158,9 @@ export default {
       left: 0;
       top: 0;
       background-color: rgba(0,0,0,.5);
-      display: none;
     }
   }
 
-  @media screen and (min-width: 1440px){
-    .poster{
-      height: calc(((100vw - 216px - 40px * 2 - 24px) / 2 - 5 * 12px) / 6 * 129 / 92);
-      max-height: 129px;
-    }
-  }
 
   .process-wrap{
     display: block;
@@ -253,12 +182,30 @@ export default {
     color: rgba(255,255,255,.6);
     letter-spacing: 0;
     text-align: center;
-    margin-top: var(--card-margin);
+    margin-top: 12px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+  .active{
+    color: rgba(255,255,255,1);
+  }
 
+}
+
+@media screen and (min-width: 1440px){
+  .focus-item{
+    width: calc(((100vw - 216px - 40px * 2 - 24px) / 2 - 5 * 12px) / 6);
+    max-width: 92px;
+  }
+}
+
+
+@media screen and (min-width: 1440px){
+  .poster{
+    height: calc(((100vw - 216px - 40px * 2 - 24px) / 2 - 5 * 12px) / 6 * 129 / 92);
+    max-height: 129px;
+  }
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1599px){
