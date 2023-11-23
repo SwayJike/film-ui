@@ -23,7 +23,7 @@
         </h1>
       </div>
       <div class="container">
-        <card class="figure" :id="movie.id" :data-image="movie.src" v-for="(movie, index) in recommendMovies" :key="movie.id">
+        <card class="figure" :id="movie.id" :data-image="movie.src" v-for="(movie, index) in recommendMovies" >
           <h3 slot="header">{{movie.title}}</h3>
           <p slot="content">{{movie['intro']}}</p>
         </card>
@@ -53,7 +53,9 @@ export default {
       recommendMovies: [],
       typeId: '',
       typeName: '全部片推荐',
-      keyword: ''
+      keyword: '',
+      size: 18,
+      current: 1,
     }
   },
   methods: {
@@ -65,10 +67,14 @@ export default {
     }),
     async initMovies(){
       this.hotMovies = await fetchHighMovies();
-      this.recommendMovies = await fetchMovieList({type: this.typeId, title: this.keyword});
+      this.recommendMovies = await fetchMovieList({type: this.typeId, title: this.keyword, size: this.size, current: this.current});
+      this.size = this.size + 1;
+      this.current = this.current + 1;
     },
     async moreMovies(){
-      let json = await fetchMovieList({type: this.typeId});
+      let json = await fetchMovieList({type: this.typeId, size: this.size, current: this.current});
+      this.size = this.size + 1;
+      this.current = this.current + 1;
       this.recommendMovies = this.recommendMovies.concat(json);
     },
     handleNavClick({typeId, typeName}){
@@ -98,8 +104,7 @@ export default {
       let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
       let clientHeight = document.documentElement.clientHeight;
       let scrollHeight = document.documentElement.scrollHeight;
-
-      if (scrollTop + clientHeight>= scrollHeight) {
+      if (scrollTop + clientHeight>= scrollHeight - 100) {
         this.handleScroll();
       }
     })

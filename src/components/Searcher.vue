@@ -132,7 +132,7 @@ export default {
     },
     handleScroll(){
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop // 滚动条偏移量
-      this.topBg = scrollTop >= 600 ? true : false;  // 如果滚动到顶部了，this.isFixed就为true
+      this.topBg = scrollTop >= 600;  // 如果滚动到顶部了，this.isFixed就为true
     }
   },
   mounted() {

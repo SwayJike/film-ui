@@ -200,12 +200,12 @@ h1+p, p+p {
   bottom: 0;
   color: #fff;
   transform: translateY(40%);
-  transition: 0.6s 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: 0.6s 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 
   p {
     opacity: 0;
     text-shadow: rgba(black, 1) 0 2px 3px;
-    transition: 0.6s 1.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition: 0.6s 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
   }
 
   * {

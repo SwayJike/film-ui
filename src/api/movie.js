@@ -1,10 +1,10 @@
-// let URL = 'http://120.25.208.81:7001';
-let URL = 'http://192.168.2.8:7001';
+let URL = 'http://120.25.208.81:8888';
+// let URL = 'http://172.16.2.153:8888';
 //
 import qs from 'qs';
 
 export async function fetchTypeList(){
-    let res = await fetch(`${URL}/tencentmovietype/list`, {
+    let res = await fetch(`${URL}/movieTypeList`, {
         method: 'GET',
     })
     let {data} = await res.json();
@@ -12,7 +12,7 @@ export async function fetchTypeList(){
 }
 
 export async function fetchMovieList(movie){
-    let res = await fetch(`${URL}/tencentmovie/list?` + qs.stringify(movie), {
+    let res = await fetch(`${URL}/movieList?` + qs.stringify(movie), {
         method: 'GET',
     })
     let {data} = await res.json();
@@ -21,7 +21,7 @@ export async function fetchMovieList(movie){
 
 
 export async function fetchMovieById(id){
-    let res = await fetch(`${URL}/tencentmovie/${id}`, {
+    let res = await fetch(`${URL}/movie/${id}`, {
         method: 'GET',
     })
     let {data} = await res.json();
@@ -29,7 +29,7 @@ export async function fetchMovieById(id){
 }
 
 export async function fetchHotMovies(){
-    let res = await fetch(`${URL}/tencentmovie/hotList`, {
+    let res = await fetch(`${URL}/hotMovieList`, {
         method: 'GET',
     })
     let {data} = await res.json();
@@ -37,7 +37,7 @@ export async function fetchHotMovies(){
 }
 
 export async function fetchHighMovies(){
-    let res = await fetch(`${URL}/tencentmovie/highList`, {
+    let res = await fetch(`${URL}/highScoreMovieList`, {
         method: 'GET',
     })
     let {data} = await res.json();

@@ -49,6 +49,12 @@ export default {
   name: "BgCarouselist",
   components: {CardCarousel},
   data(){
+    // 13902,"哥,你好",https://v.qq.com/x/cover/mzc00200st6j0jd.html,//puui.qpic.cn/vcover_vt_pic/0/mzc00200st6j0jd1667792532608/260,01:50:33,8.1,主演：马丽 常远 魏翔 贾冰 黄允桐,6854145,,,
+    // 13903,神奇动物,https://v.qq.com/x/cover/mzc002007blv9mj.html,//puui.qpic.cn/vcover_vt_pic/0/mzc002007blv9mj1666603313891/260,02:08:26,9.1,主　演： 埃迪·雷德梅恩 裘德·洛 麦斯·米科尔森,6844557,,,
+    // 13904,小黄人大眼萌,https://v.qq.com/x/cover/mzc00200oqwulnj.html,//puui.qpic.cn/vcover_vt_pic/0/mzc00200oqwulnj1668158498923/260,01:28:28,9.1,导　演： 凯尔·巴尔达 布拉德·埃布尔森,96584745,,,
+    // 13905,重啓,https://v.qq.com/x/cover/mzc00200dxhbjfd.html,//puui.qpic.cn/vcover_vt_pic/0/mzc00200dxhbjfd1667560893718/260,01:30:07,7.3,主　演： 季晨 季肖冰,5241447,,,
+    // 13906,夺命双骄,https://v.qq.com/x/cover/mzc00200g2cy0mm.html,//puui.qpic.cn/vcover_vt_pic/0/mzc00200g2cy0mm1668350692335/260,01:20:13,6.9,主　演： 韩昕妤 李柏蓉 楼学贤,25647,,,
+
     return {
       love: false,
       cur_index: 0,
@@ -91,7 +97,7 @@ export default {
           title: '重啓'
         },
         {
-          id: -1,
+          id: 13906,
           logo: 'https://puui.qpic.cn/tv/0/1249549085/0?max_age=7776000',
           label: '李柏蓉 韩昕妤 犯罪动作',
           reason: '战斗天使一正一邪生死对决',

@@ -85,6 +85,8 @@ export default {
         {name:"苍 龙",type:"slide",url:"https://www.ckplayer.vip/jiexi/?url="},
         {name:"四 象",type:"fill",url:"https://www.mtosz.com/m3u8.php?url="},
       ],
+      size: 18,
+      current: 1
     }
   },
   computed: {
@@ -114,14 +116,18 @@ export default {
       trailing: false
     }),
     async moreMovies(){
-      let json = await fetchMovieList();
+      let json = await fetchMovieList({size: this.size, current: this.current});
+      this.size = this.size + 1;
+      this.current = this.current + 1;
       this.recommendMovies = this.recommendMovies.concat(json);
     },
     async fetchMovieById(id){
       this.movie = await fetchMovieById(id);
     },
     async initMovies(){
-      this.recommendMovies = await fetchMovieList();
+      this.recommendMovies = await fetchMovieList({size: this.size, current: this.current});
+      this.size = this.size + 1;
+      this.current = this.current + 1;
     }
   },
   mounted() {
